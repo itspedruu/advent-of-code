@@ -95,19 +95,6 @@ func solveB(lines []string) int {
 	maxRow := len(lines) - 1
 	maxColumn := len(lines[0]) - 1
 
-	addToEnds := func (initialPosition [2]int, endPosition [2]int) {
-		curEnds, ok := ends[initialPosition]
-
-		if ok {
-			ends[initialPosition] = append(curEnds, endPosition)
-		} else {
-			newEnds := make([][2]int, 1)
-			newEnds[0] = endPosition
-
-			ends[initialPosition] = newEnds
-		}
-	}
-
 	for len(queue) > 0 {
 		searchIndex := queue[0][0]
 		rowSpeed := queue[0][1]
@@ -129,7 +116,16 @@ func solveB(lines []string) int {
 				initialPosition := [2]int{ row - rowSpeed, column - columnSpeed }
 				endPosition := [2]int{ newRow, newColumn }
 
-				addToEnds(initialPosition, endPosition);
+				curEnds, ok := ends[initialPosition]
+
+				if ok {
+					ends[initialPosition] = append(curEnds, endPosition)
+				} else {
+					newEnds := make([][2]int, 1)
+					newEnds[0] = endPosition
+
+					ends[initialPosition] = newEnds
+				}
 			} else {
 				newNode := [5]int{ searchIndex + 1, rowSpeed, columnSpeed, newRow, newColumn }
 
