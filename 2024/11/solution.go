@@ -77,7 +77,7 @@ func applyRules(stone int, memo map[[2]int]int, ttl int) int {
 	}
 }
 
-func solveA(stones []int) (int, int) {
+func solve(stones []int) (int, int) {
 	solutionA := 0
 	solutionB := 0
 
@@ -99,7 +99,7 @@ func main() {
 	fmt.Println("~ reading file:", time.Since(start))
 	start = time.Now()
 
-	solutionA, solutionB := solveA(stones)
+	solutionA, solutionB := solve(stones)
 
 	fmt.Println("~ solving:", time.Since(start))
 
